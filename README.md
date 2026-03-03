@@ -5,7 +5,4 @@
   🌪️ Genos Bot 🌪️
 </h1>
 
-<!-- GIF azul Principal -->
-<p align="center">
-  <img src="https://github.com/juan20092/Lines-Neon-MB/raw/main/assets_MB/line-neon.gif" width="400"/>
-</p>
+# > BOT ÚNICO MULTIPROPOSITO
