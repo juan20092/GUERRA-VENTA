@@ -5,4 +5,4 @@
   🌪️ Genos Bot 🌪️
 </h1>
 
-# >BOT ÚNICO MULTIPROPOSITO
+# 🍭 𝐁𝐎𝐓 𝐔́𝐍𝐈𝐂𝐎 𝐌𝐔𝐋𝐓𝐈𝐏𝐑𝐎𝐏𝐎𝐒𝐈𝐓𝐎
