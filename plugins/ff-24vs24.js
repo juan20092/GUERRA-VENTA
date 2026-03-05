@@ -5,7 +5,7 @@ const aliasesCO = ['co', 'colombia', 'col']
 
 let handler = async (m, { conn, args }) => {
   if (args.length === 0) {
-    await conn.sendMessage(m.chat, { text: '𝐓𝐢𝐞𝐧𝐞𝐬 𝐪𝐮𝐞 𝐞𝐬𝐩𝐞𝐜𝐢𝐟𝐢𝐜𝐚𝐫 𝐥𝐚 𝐡𝐨𝐫𝐚 𝐲 𝐞𝐥 𝐩𝐚𝐢́𝐬' })
+    await conn.sendMessage(m.chat, { text: '𝐓𝐢𝐞𝐧𝐞𝐬 𝐪𝐮𝐞 𝐞𝐬𝐩𝐞𝐜𝐢𝐟𝐢𝐜𝐚𝐫 𝐥𝐚 𝐡𝐨𝐫𝐚 𝐲 𝐞𝐥 𝐩𝐚𝐢́𝐬 ❇️' })
     return
   }
 
@@ -39,7 +39,7 @@ let handler = async (m, { conn, args }) => {
   }
 
   if (horaInput === null) {
-    await conn.sendMessage(m.chat, { text: '𝐇𝐨𝐫𝐚 𝐢𝐧𝐯𝐚́𝐥𝐢𝐝𝐚. Ej:\n.24vs24 3 pm mx\n.24vs24 16 co' })
+    await conn.sendMessage(m.chat, { text: '𝐇𝐨𝐫𝐚 𝐢𝐧𝐯𝐚́𝐥𝐢𝐝𝐚. Ej:\n.12vs12 3 pm mx\n.12vs12 16 co' })
     return
   }
 
@@ -62,53 +62,72 @@ let handler = async (m, { conn, args }) => {
   const mexText = format12h(mexHora)
   const colText = format12h(colHora)
 
-  const template = generarVersus([], [], mexText, colText)
+  const template = generarVersus([], [], [], [], [], [], [], mexText, colText)
   const sent = await conn.sendMessage(m.chat, { text: template, mentions: [] })
 
   versusData[sent.key.id] = {
     chat: m.chat,
-    escuadra: [],
+    escuadra1: [],
+    escuadra2: [],
+    escuadra3: [],
+    escuadra4: [],
+    escuadra5: [],
+    escuadra6: [],
     suplentes: [],
     mexText,
     colText
   }
 }
-
 handler.help = ['24vs24']
 handler.tags = ['freefire']
 handler.command = /^\.?(24vs24|vs24)$/i
 handler.group = true
-
+handler.admin = true
 export default handler
 
-function generarVersus(escuadra, suplentes, mexText = '  ', colText = '  ') {
+function generarVersus(esc1, esc2, esc3, esc4, esc5, esc6, suplentes, mexText = '  ', colText = '  ') {
   function formatEscuadra(arr) {
     let out = ''
-    for (let i = 0; i < 24; i++) { // máximo 24 jugadores
-      let icon = i === 0 ? '👑' : '🎮'
+    for (let i = 0; i < 4; i++) {
+      let icon = i === 0 ? '👑' : '🧑🏾‍💻'
       out += arr[i] ? `${icon} ┇ @${arr[i].split('@')[0]}\n` : `${icon} ┇ \n`
     }
-    return out.trimEnd() || '─ ┇ Sin jugadores'
+    return out.trimEnd()
   }
 
   function formatSuplentes(arr) {
     let out = ''
-    for (let i = 0; i < 4; i++) { // suplentes (ajústalo si quieres)
-      out += arr[i] ? `🎮 ┇ @${arr[i].split('@')[0]}\n` : `🎮 ┇ \n`
+    for (let i = 0; i < 2; i++) {
+      out += arr[i] ? `🧑🏾‍💻 ┇ @${arr[i].split('@')[0]}\n` : `🧑🏾‍💻 ┇ \n`
     }
-    return out.trimEnd() || '─ ┇ Sin suplentes'
+    return out.trimEnd()
   }
 
-  return `*𝟐𝟒 𝐕𝐄𝐑𝐒𝐔𝐒 𝟐𝟒*
+  return `*24 𝐕𝐒 24*
 
-*𝐇𝐎𝐑𝐀𝐑𝐈𝐎𝐒*;
-*🇲🇽 MEXICO* : ${mexText}
+*𝐇𝐎𝐑𝐀𝐑𝐈𝐎𝐒*;  
+*🇲🇽 MEXICO* : ${mexText}  
 *🇨🇴 COLOMBIA* : ${colText}
 
 *𝐉𝐔𝐆𝐀𝐃𝐎𝐑𝐄𝐒 𝐏𝐑𝐄𝐒𝐄𝐍𝐓𝐄𝐒*;
 
-*𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 Ú𝗡𝗜𝗖𝗔*
-${formatEscuadra(escuadra)}
+*𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 1*
+${formatEscuadra(esc1)}
+
+*𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 2*
+${formatEscuadra(esc2)}
+
+*𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 3*
+${formatEscuadra(esc3)}
+
+*𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 4*
+${formatEscuadra(esc4)}
+
+*𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 5*
+${formatEscuadra(esc5)}
+
+*𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 6*
+${formatEscuadra(esc6)}
 
 ㅤʚ *𝐒𝐔𝐏𝐋𝐄𝐍𝐓𝐄𝐒*:
 ${formatSuplentes(suplentes)}
@@ -119,7 +138,7 @@ ${formatSuplentes(suplentes)}
 > 「 🎉 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
 > 「 👍 」𝐒𝐮𝐩𝐥𝐞𝐧𝐭𝐞  
 > 「 👎 」𝐒𝐚𝐥𝐢𝐫 𝐃𝐞 𝐋𝐚 𝐋𝐢𝐬𝐭𝐚  
-> 「 ❌ 」𝐑𝐞𝐢𝐧𝐢𝐜𝐢𝐚𝐫 𝐋𝐢𝐬𝐭𝐚      
+> 「 ❌ 」𝐑𝐞𝐢𝐧𝐢𝐜𝐢𝐚𝐫 𝐋𝐢𝐬𝐭𝐚        
 `
 }
 
@@ -133,7 +152,12 @@ conn.ev.on('messages.upsert', async ({ messages }) => {
     let user = msg.key.participant || msg.key.remoteJid
     let emoji = msg.message.reactionMessage.text
     const isInAnyList =
-      data.escuadra.includes(user) ||
+      data.escuadra1.includes(user) ||
+      data.escuadra2.includes(user) ||
+      data.escuadra3.includes(user) ||
+      data.escuadra4.includes(user) ||
+      data.escuadra5.includes(user) ||
+      data.escuadra6.includes(user) ||
       data.suplentes.includes(user)
 
     if (emoji === '👎' && !isInAnyList) continue
@@ -146,33 +170,89 @@ conn.ev.on('messages.upsert', async ({ messages }) => {
     } catch {}
 
     if (emoji === '❌' && isAdmin) {
-      data.escuadra = []
+      const hasPlayers =
+        data.escuadra1.length +
+        data.escuadra2.length +
+        data.escuadra3.length +
+        data.escuadra4.length +
+        data.escuadra5.length +
+        data.escuadra6.length +
+        data.suplentes.length > 0
+      if (!hasPlayers) continue
+
+      data.escuadra1 = []
+      data.escuadra2 = []
+      data.escuadra3 = []
+      data.escuadra4 = []
+      data.escuadra5 = []
+      data.escuadra6 = []
       data.suplentes = []
 
-      let nuevoTexto = generarVersus(data.escuadra, data.suplentes, data.mexText, data.colText)
-
-      try { await conn.sendMessage(data.chat, { delete: msg.message.reactionMessage.key }) } catch {}
-
+      let nuevoTexto = generarVersus(
+        data.escuadra1,
+        data.escuadra2,
+        data.escuadra3,
+        data.escuadra4,
+        data.escuadra5,
+        data.escuadra6,
+        data.suplentes,
+        data.mexText,
+        data.colText
+      )
+      try {
+        await conn.sendMessage(data.chat, { delete: msg.message.reactionMessage.key })
+      } catch {}
       let sent = await conn.sendMessage(data.chat, { text: nuevoTexto, mentions: [] })
       delete versusData[msgID]
       versusData[sent.key.id] = data
       continue
     }
 
-    data.escuadra = data.escuadra.filter(u => u !== user)
+    // Quitar usuario de todas las listas para evitar duplicados
+    data.escuadra1 = data.escuadra1.filter(u => u !== user)
+    data.escuadra2 = data.escuadra2.filter(u => u !== user)
+    data.escuadra3 = data.escuadra3.filter(u => u !== user)
+    data.escuadra4 = data.escuadra4.filter(u => u !== user)
+    data.escuadra5 = data.escuadra5.filter(u => u !== user)
+    data.escuadra6 = data.escuadra6.filter(u => u !== user)
     data.suplentes = data.suplentes.filter(u => u !== user)
 
     if (emoji === '🎉') {
-      if (data.escuadra.length < 24) data.escuadra.push(user)
+      if (data.escuadra1.length < 4) data.escuadra1.push(user)
+      else if (data.escuadra2.length < 4) data.escuadra2.push(user)
+      else if (data.escuadra3.length < 4) data.escuadra3.push(user)
+      else if (data.escuadra4.length < 4) data.escuadra4.push(user)
+      else if (data.escuadra5.length < 4) data.escuadra5.push(user)
+      else if (data.escuadra6.length < 4) data.escuadra6.push(user)
     } else if (emoji === '👍') {
-      if (data.suplentes.length < 4) data.suplentes.push(user)
+      if (data.suplentes.length < 2) data.suplentes.push(user)
     } else if (emoji === '👎') {
       // Ya fue eliminado arriba
     } else continue
 
-    let nuevoTexto = generarVersus(data.escuadra, data.suplentes, data.mexText, data.colText)
-    let mentions = [...data.escuadra, ...data.suplentes]
-    try { await conn.sendMessage(data.chat, { delete: msg.message.reactionMessage.key }) } catch {}
+    let nuevoTexto = generarVersus(
+      data.escuadra1,
+      data.escuadra2,
+      data.escuadra3,
+      data.escuadra4,
+      data.escuadra5,
+      data.escuadra6,
+      data.suplentes,
+      data.mexText,
+      data.colText
+    )
+    let mentions = [
+      ...data.escuadra1,
+      ...data.escuadra2,
+      ...data.escuadra3,
+      ...data.escuadra4,
+      ...data.escuadra5,
+      ...data.escuadra6,
+      ...data.suplentes
+    ]
+    try {
+      await conn.sendMessage(data.chat, { delete: msg.message.reactionMessage.key })
+    } catch {}
     let sent = await conn.sendMessage(data.chat, { text: nuevoTexto, mentions })
     delete versusData[msgID]
     versusData[sent.key.id] = data
