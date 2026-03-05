@@ -5,7 +5,7 @@ const aliasesCO = ['co', 'colombia', 'col']
 
 let handler = async (m, { conn, args }) => {
   if (args.length === 0) {
-    await conn.sendMessage(m.chat, { text: '𝐓𝐢𝐞𝐧𝐞𝐬 𝐪𝐮𝐞 𝐞𝐬𝐩𝐞𝐜𝐢𝐟𝐢𝐜𝐚𝐫 𝐥𝐚 𝐡𝐨𝐫𝐚 𝐲 𝐞𝐥 𝐩𝐚𝐢́𝐬' })
+    await conn.sendMessage(m.chat, { text: '𝐓𝐢𝐞𝐧𝐞𝐬 𝐪𝐮𝐞 𝐞𝐬𝐩𝐞𝐜𝐢𝐟𝐢𝐜𝐚𝐫 𝐥𝐚 𝐡𝐨𝐫𝐚 𝐲 𝐞𝐥 𝐩𝐚𝐢́𝐬 ❇️' })
     return
   }
 
@@ -73,19 +73,17 @@ let handler = async (m, { conn, args }) => {
     colText
   }
 }
-
 handler.help = ['4vs4']
 handler.tags = ['freefire']
 handler.command = /^\.?(4vs4|vs4)$/i
 handler.group = true
-
 export default handler
 
 function generarVersus(escuadra, suplentes, mexText = '  ', colText = '  ') {
   function formatEscuadra(arr) {
     let out = ''
     for (let i = 0; i < 4; i++) { // máximo 4 jugadores
-      let icon = i === 0 ? '👑' : '🎮'
+      let icon = i === 0 ? '👑' : '🧑🏾‍💻'
       out += arr[i] ? `${icon} ┇ @${arr[i].split('@')[0]}\n` : `${icon} ┇ \n`
     }
     return out.trimEnd() || '─ ┇ Sin jugadores'
@@ -93,13 +91,13 @@ function generarVersus(escuadra, suplentes, mexText = '  ', colText = '  ') {
 
   function formatSuplentes(arr) {
     let out = ''
-    for (let i = 0; i < 2; i++) { // suplentes (ajústalo si quieres)
-      out += arr[i] ? `🎮 ┇ @${arr[i].split('@')[0]}\n` : `🎮 ┇ \n`
+    for (let i = 0; i < 2; i++) {
+      out += arr[i] ? `🧑🏾‍💻 ┇ @${arr[i].split('@')[0]}\n` : `🧑🏾‍💻 ┇ \n`
     }
     return out.trimEnd() || '─ ┇ Sin suplentes'
   }
 
-  return `*𝟒 𝐕𝐄𝐑𝐒𝐔𝐒 𝟒*
+  return `*4 𝐕𝐒 4*
 
 *𝐇𝐎𝐑𝐀𝐑𝐈𝐎𝐒*;
 *🇲🇽 MEXICO* : ${mexText}
@@ -149,10 +147,13 @@ conn.ev.on('messages.upsert', async ({ messages }) => {
       data.escuadra = []
       data.suplentes = []
 
+      // Texto de lista vacía visible
       let nuevoTexto = generarVersus(data.escuadra, data.suplentes, data.mexText, data.colText)
 
+      // Borrar mensaje original
       try { await conn.sendMessage(data.chat, { delete: msg.message.reactionMessage.key }) } catch {}
 
+      // Enviar nuevo mensaje vacío
       let sent = await conn.sendMessage(data.chat, { text: nuevoTexto, mentions: [] })
       delete versusData[msgID]
       versusData[sent.key.id] = data
