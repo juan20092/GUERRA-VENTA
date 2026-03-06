@@ -1,75 +1,119 @@
-import chalk from 'chalk'
-import fetch from 'node-fetch'
-import ws from 'ws'
-let WAMessageStubType = (await import('@whiskeysockets/baileys')).default
-import { readdirSync, unlinkSync, existsSync, promises as fs, rmSync} from 'fs'
-import path from 'path'
+export async function before(m, { conn, participants }) {
+  if (!m.messageStubType || !m.isGroup) return
 
-let handler = m => m
-handler.before = async function (m, { conn, participants, groupMetadata}) {
-    if (!m.messageStubType ||!m.isGroup) return
+  const usuario = `@${m.sender.split('@')[0]}`
+  const admins = participants.filter(p => p.admin !== null).map(p => p.id)
 
-    const fkontak = {
-        key: {
-            participants: "0@s.whatsapp.net",
-            remoteJid: "status@broadcast",
-            fromMe: false,
-            id: "AlienMenu"
-},
-        message: {
-            locationMessage: {
-                name: "*𝔙𝔦𝔭 𝔅𝔬𝔱 🔪*",
-                jpegThumbnail: await (await fetch('https://files.catbox.moe/gx1ipj.jpg')).buffer(),
-                vcard:
-                    "BEGIN:VCARD\n" +
-                    "VERSION:3.0\n" +
-                    "N:;Ultra bot;;;\n" +
-                    "FN:Ultra bot\n" +
-                    "ORG:Juan Developers\n" +
-                    "TITLE:\n" +
-                    "item1.TEL;waid=19709001746:+1 (970) 900-1746\n" +
-                    "item1.X-ABLabel:Alien\n" +
-                    "X-WA-BIZ-DESCRIPTION:🧨 Llamado grupal universal con estilo.\n" +
-                    "X-WA-BIZ-NAME:Ultra bot\n" +
-                    "END:VCARD"
+  // 📌 Imagen estable 300x300 (perfil o fallback)
+  let pp
+  try {
+    const url = await conn.profilePictureUrl(m.sender, 'image')
+      .catch(() => 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png')
+    pp = await conn.getFile(url).then(r => r.data)
+  } catch {
+    pp = await conn.getFile('https://cdn-icons-png.flaticon.com/512/3135/3135715.png')
+      .then(r => r.data)
+  }
+
+  // 📍 Fake Contact (NO SE DAÑA)
+  const fkontak = {
+    key: {
+      participants: '0@s.whatsapp.net',
+      remoteJid: 'status@broadcast',
+      fromMe: false,
+      id: 'JirenBot'
+    },
+    message: {
+      locationMessage: {
+        name: 'Hola, Soy 𝕵𝑰𝑹𝑬𝑵 𝕭𝑶𝑻',
+        jpegThumbnail: pp
+      }
+    },
+    participant: '0@s.whatsapp.net'
+  }
+
+  const param = m.messageStubParameters?.[0]
+  const mentions = [
+    m.sender,
+    ...(param?.includes('@') ? [param] : []),
+    ...admins
+  ]
+
+  switch (m.messageStubType) {
+
+    case 21:
+      await conn.sendMessage(m.chat, {
+        text: `${usuario} \`𝐇𝐀 𝐂𝐀𝐌𝐁𝐈𝐀𝐃𝐎 𝐄𝐋 𝐍𝐎𝐌𝐁𝐑𝐄 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎 𝐀:\`\n\n> *${param}*`,
+        mentions
+      }, { quoted: fkontak })
+      break
+
+    case 22:
+      await conn.sendMessage(m.chat, {
+        text: `${usuario} \`𝐂𝐀𝐌𝐁𝐈𝐎 𝐋𝐀 𝐅𝐎𝐓𝐎 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎\``,
+        mentions
+      }, { quoted: fkontak })
+      break
+
+    case 24:
+      await conn.sendMessage(m.chat, {
+        text: `${usuario} \`𝐇𝐀 𝐂𝐀𝐌𝐁𝐈𝐀𝐃𝐎 𝐋𝐀 𝐃𝐄𝐒𝐂𝐑𝐈𝐏𝐂𝐈𝐎𝐍 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎\``,
+        mentions
+      }, { quoted: fkontak })
+      break
+
+    case 25:
+      await conn.sendMessage(m.chat, {
+        text: `📌 \`𝐀𝐇𝐎𝐑𝐀 ${param === 'on' ? '𝐒𝐎𝐋𝐎 𝐀𝐃𝐌𝐈𝐍𝐒' : '𝐓𝐎𝐃𝐎𝐒'} 𝐏𝐔𝐄𝐃𝐄𝐍 𝐄𝐃𝐈𝐓𝐀𝐑 𝐋𝐀 𝐈𝐍𝐅𝐎\``,
+        mentions
+      }, { quoted: fkontak })
+      break
+
+    case 26:
+      await conn.sendMessage(m.chat, {
+        text:
+          `> 𝐆𝐑𝐔𝐏𝐎 *${param === 'on' ? '𝐂𝐄𝐑𝐑𝐀𝐃𝐎 🔒' : '𝐀𝐁𝐈𝐄𝐑𝐓𝐎 🔓'}*\n\n` +
+          `> ${param === 'on'
+            ? '𝐒𝐎𝐋𝐎 𝐀𝐃𝐌𝐈𝐍𝐈𝐒𝐓𝐑𝐀𝐃𝐎𝐑𝐄𝐒 𝐄𝐒𝐂𝐑𝐈𝐁𝐄𝐍'
+            : '𝐘𝐀 𝐓𝐎𝐃𝐎𝐒 𝐏𝐔𝐄𝐃𝐄𝐍 𝐄𝐒𝐂𝐑𝐈𝐁𝐈𝐑'}`,
+        mentions
+      }, { quoted: fkontak })
+      break
+
+    case 29:
+      await conn.sendMessage(m.chat, {
+        text:
+          `@${param.split('@')[0]}\n\n` +
+          `> 𝐀𝐇𝐎𝐑𝐀 𝐓𝐈𝐄𝐍𝐄 𝐏𝐎𝐃𝐄𝐑𝐄𝐒 🛡️\n\n` +
+          `📌 𝐀𝐃𝐌𝐈𝐍: ${usuario}`,
+        mentions
+      }, { quoted: fkontak })
+      break
+
+    case 30:
+      await conn.sendMessage(m.chat, {
+        text:
+          `@${param.split('@')[0]}\n\n` +
+          `> 𝐘𝐀 𝐍𝐎 𝐓𝐈𝐄𝐍𝐄 𝐏𝐎𝐃𝐄𝐑𝐄𝐒 🛡️\n\n` +
+          `📌 𝐋𝐄 𝐐𝐔𝐈𝐓𝐎 𝐀𝐃𝐌𝐈𝐍: ${usuario}`,
+        mentions
+      }, { quoted: fkontak })
+      break
+
+    case 72:
+      await conn.sendMessage(m.chat, {
+        text:
+          `${usuario}\n\n` +
+          `> 𝐂𝐀𝐌𝐁𝐈𝐎 𝐋𝐀 𝐃𝐔𝐑𝐀𝐂𝐈𝐎́𝐍 𝐃𝐄 𝐌𝐄𝐍𝐒𝐀𝐉𝐄𝐒 𝐓𝐄𝐌𝐏𝐎𝐑𝐀𝐋𝐄𝐒 A @${param}`,
+        mentions
+      }, { quoted: fkontak })
+      break
+
+    case 123:
+      await conn.sendMessage(m.chat, {
+        text: `${usuario} 𝐃𝐄𝐒𝐀𝐂𝐓𝐈𝐕𝐎 𝐋𝐎𝐒 𝐌𝐄𝐍𝐒𝐀𝐉𝐄𝐒 𝐓𝐄𝐌𝐏𝐎𝐑𝐀𝐋𝐄𝐒`,
+        mentions
+      }, { quoted: fkontak })
+      break
+  }
 }
-},
-        participant: "0@s.whatsapp.net"
-}
-
-    let chat = global.db.data.chats[m.chat]
-    let usuario = `@${m.sender.split`@`[0]}`
-    let pp = await conn.profilePictureUrl(m.chat, 'image').catch(_ => null) || 'https://files.catbox.moe/gx1ipj.jpg'
-
-    let nombre = `${usuario} *𝐇𝐀 𝐂𝐀𝐌𝐁𝐈𝐀𝐃𝐎 𝐄𝐋 𝐍𝐎𝐌𝐁𝐑𝐄 𝐃𝐄𝐋 𝐆𝐑𝐔𝐏𝐎*\n\n> 🧨 *𝐍𝐔𝐄𝐕𝐎 𝐍𝐎𝐌𝐁𝐑𝐄:* _${m.messageStubParameters[0]}_`
-    let foto = `📸*¡Nᴜᴇᴠᴀ ꜰᴏᴛᴏ ᴅᴇ ɢʀᴜᴘᴏ!*\n\n> 🧨 𝗔𝗖𝗖𝗜𝗢𝗡 𝗛𝗘𝗖𝗛𝗔 𝗣𝗢𝗥: ${usuario}`
-    let edit = `🛠 ${usuario} 𝗛𝗔 𝗔𝗝𝗨𝗦𝗧𝗔𝗗𝗢 𝗟𝗔 𝗖𝗢𝗡𝗙𝗜𝗚𝗨𝗥𝗔𝗖𝗜𝗢𝗡 𝗗𝗘𝗟 𝗚𝗥𝗨𝗣𝗢\n\n> 🔒 Aʜᴏʀᴀ *${m.messageStubParameters[0] == 'on'? 'sᴏʟᴏ ʟᴏs ᴀᴅᴍɪɴɪsᴛʀᴀᴅᴏʀᴇs': 'todos'}* ᴘᴜᴇᴅᴇɴ ᴄᴏɴꜰɪɢᴜʀᴀʀ ᴇʟ ɢʀᴜᴘᴏ.`
-    let newlink = `*¡El enlace del grupo ha sido restablecido!* 🔗\n\n> 🧨 𝗔𝗖𝗖𝗜𝗢𝗡 𝗛𝗘𝗖𝗛𝗔 𝗣𝗢𝗥: ${usuario}`
-    let status = `🗣️ 𝗘𝗟 𝗚𝗥𝗨𝗣𝗢 𝗛𝗔 𝗦𝗜𝗗𝗢 *${m.messageStubParameters[0] == 'on'? '𝗖𝗘𝗥𝗥𝗔𝗗𝗢': '𝗔𝗕𝗜𝗘𝗥𝗧𝗢'}* 𝗣𝗢𝗥 ${usuario}!\n\n> 🔪 𝗔𝗛𝗢𝗥𝗔 ${m.messageStubParameters[0] == 'on'? '𝗦𝗢𝗟𝗢 𝗟𝗢𝗦 𝗔𝗗𝗠𝗜𝗡𝗦': '𝗧𝗢𝗗𝗢𝗦'} 𝗣𝗨𝗘𝗗𝗘𝗡 𝗘𝗡𝗩𝗜𝗔𝗥 𝗠𝗘𝗡𝗦𝗔𝗝𝗘𝗦`
-    let admingp = `@${m.messageStubParameters[0].split`@`[0]} *! 𝗔𝗛𝗢𝗥𝗔 𝗘𝗦 𝗔𝗗𝗠𝗜𝗡 𝗗𝗘𝗟 𝗚𝗥𝗨𝗣𝗢 !*\n\n> 🧨 𝗔𝗖𝗖𝗜𝗢𝗡 𝗛𝗘𝗖𝗛𝗔 𝗣𝗢𝗥: ${usuario}`
-    let noadmingp = `@${m.messageStubParameters[0].split`@`[0]} *! 𝗛𝗔 𝗗𝗘𝗝𝗔𝗗𝗢 𝗗𝗘 𝗦𝗘𝗥 𝗔𝗗𝗠𝗜𝗡𝗦 𝗗𝗘𝗟 𝗚𝗥𝗨𝗣𝗢 !*\n\n> 🧨 𝗔𝗖𝗖𝗜𝗢𝗡 𝗛𝗘𝗖𝗛𝗔 𝗣𝗢𝗥: ${usuario}`
-
-    if (chat.detect && m.messageStubType == 21) {
-        await this.sendMessage(m.chat, { text: nombre, mentions: [m.sender]}, { quoted: fkontak})
-} else if (chat.detect && m.messageStubType == 22) {
-        await this.sendMessage(m.chat, { image: { url: pp}, caption: foto, mentions: [m.sender]}, { quoted: fkontak})
-} else if (chat.detect && m.messageStubType == 23) {
-        await this.sendMessage(m.chat, { text: newlink, mentions: [m.sender]}, { quoted: fkontak})
-} else if (chat.detect && m.messageStubType == 25) {
-        await this.sendMessage(m.chat, { text: edit, mentions: [m.sender]}, { quoted: fkontak})
-} else if (chat.detect && m.messageStubType == 26) {
-        await this.sendMessage(m.chat, { text: status, mentions: [m.sender]}, { quoted: fkontak})
-} else if (chat.detect && m.messageStubType == 29) {
-        await this.sendMessage(m.chat, { text: admingp, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`]}, { quoted: fkontak})
-} else if (chat.detect && m.messageStubType == 30) {
-await this.sendMessage(m.chat, { text: noadmingp, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`]}, { quoted: fkontak})
-} else {
-        console.log({
-            messageStubType: m.messageStubType,
-            messageStubParameters: m.messageStubParameters,
-            type: WAMessageStubType[m.messageStubType],
-})
-}
-}
-
-export default handler
