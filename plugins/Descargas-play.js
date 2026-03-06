@@ -20,15 +20,26 @@ let handler = async (m, { conn, text, usedPrefix }) => {
     if (!search.videos.length) throw new Error('No encontré resultados')
 
     const video = search.videos[0]
-    const { title, url, thumbnail } = video
+    const { title, url, thumbnail, author, duration, views } = video
 
     let thumbBuffer = null
     if (thumbnail) {
       try {
         const resp = await fetch(thumbnail)
-        thumbBuffer = Buffer.from(await resp.arrayBuffer())
+        const arrayBuffer = await resp.arrayBuffer()
+        thumbBuffer = Buffer.from(arrayBuffer)
       } catch {}
     }
+
+    // Enviar información de la música con imagen
+    await conn.sendMessage(
+      m.chat,
+      {
+        image: thumbBuffer,
+        caption: `🎵 *${title}*\n👤 *Artista:* ${author?.name || 'Desconocido'}\n⏱️ *Duración:* ${duration || 'N/A'}\n👁️ *Vistas:* ${views || 'N/A'}\n🔗 [Ver en YouTube](${url})`,
+      },
+      { quoted: m }
+    )
 
     
     const apiB64 = 'aHR0cHM6Ly9zbWFzYWNoaWthLmFseWFib3QueHl6L2Rvd25sb2FkX2F1ZGlvP3VybD0='
