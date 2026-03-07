@@ -350,7 +350,7 @@ export async function handler(chatUpdate) {
                     if (m.text && user.banned && !isROwner) {
                         if (user.antispam > 2) return
                         m.reply(`*🚫 Está baneado(a), no puede usar los comandos de este bot!*\n\n${user.bannedReason ? `\n💌 *Motivo:* 
-${user.bannedReason}` : '💌 *Motivo:* Sin Especificar'}\n\n⚠️ *Si cree que es un error contacte con mi creador:*\n- wa.me/‪573223702049`)
+${user.bannedReason}` : '💌 *Motivo:* Sin Especificar'}\n\n⚠️ *Si cree que es un error contacte con mi creador:*\n- wa.me/‪1(845)6897070‬`)
                         user.antispam++
                         return
                     }
@@ -539,59 +539,21 @@ ${user.bannedReason}` : '💌 *Motivo:* Sin Especificar'}\n\n⚠️ *Si cree que
     }
 }
 
-global.dfail = (type, m, conn, usedPrefix, command) => {
-  let user2 = m.pushName || 'VIP BOT'
+global.dfail = (type, m, conn) => {
 
-  // fallback por si no te pasan "command"
-  const comando = command || m.command || ''
-
-  const msg = {
-    rowner: `┏━━━✦☆✦━━━┓
-🌙  El conjuro  solo lo 
-puede usar mi amo supremo.  
-(ノಠ益ಠ)ノ彡✧
-┗━━━✦☆✦━━━┛`,
-
-    owner: `╔═══ ❖ ═══╗
-🔮 El hechizo pertenece 
-a los guardianes mayores.  
-ヽ(>∀<☆)ノ
-╚═══ ❖ ═══╝`,
-
-    mods: `｡☆✼★━━━━★✼☆｡
-☁️ El poder de está reservado
-a los moderadores mágicos.
-(｡•́︿•̀｡)
-｡☆✼★━━━━★✼☆｡`,
-
-    premium: `✧･ﾟ: *${usedPrefix || ''}${comando}* ✧･ﾟ:
-💎 Solo los bendecidos premium  
-pueden tocar este tesoro UwU
-⊂(￣▽￣)⊃`,
-
-    group: `┏(＾0＾)┛
-🏮 El ritual   sólo
-funciona en salones grupales.
-┗(＾0＾) ┓`,
-
-    private: `╭(♡･ㅂ･)و ̑̑
-📜 El conjuro sólo se
-revela en privado conmigo.
-╰(°▽°)╯`,
-
-    admin: `( ⚆ _ ⚆ )  
-📛 El talismán requiere 
-la fuerza de un admin.`,
-
-    botAdmin: `╰(⇀︿⇀)つ-]═──
-🤖 Para usar necesito ser 
-el guardián admin primero!`,
-
-    restrict: `🚪 Esta puerta secreta  
-está cerrada por órdenes del creador.`
-  }[type]
-
-  if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('🚫'))
+    let user2 = m.pushName || 'VIP BOT'
+    const msg = {
+        rowner: '*🌟 Esᴛᴀ ꜰᴜɴᴄɪᴏ́ɴ sᴏʟᴏ ᴘᴜᴇᴅᴇ sᴇʀ ᴜᴛɪʟɪᴢᴀᴅᴀ ᴘᴏʀ ᴇʟ ᴄʀᴇᴀᴅᴏʀ ᴅᴇʟ ʙᴏᴛ*',
+        owner: '*🍫 Esᴛᴀ ꜰᴜɴᴄɪᴏ́ɴ sᴏʟᴏ ᴘᴜᴇᴅᴇ sᴇʀ ᴜᴛɪʟɪᴢᴀᴅᴀ ᴘᴏʀ ᴇʟ ᴘʀᴏᴘɪᴇᴛᴀʀɪᴏ ᴅᴇʟ ʙᴏᴛ*',
+        mods: '*🍭 Esᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴘᴜᴇᴅᴇ sᴇʀ ᴜᴛɪʟɪᴢᴀᴅᴏ ᴘᴏʀ ʟᴏs ᴍᴏᴅᴇʀᴀᴅᴏʀᴇs ᴅᴇʟ ʙᴏᴛ*',
+        premium: '*🌟 Esᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴘᴜᴇᴅᴇ sᴇʀ ᴜᴛɪʟɪᴢᴀᴅᴏ ᴘᴏʀ ᴜsᴜᴀʀɪᴏs ᴘʀᴇᴍɪᴜᴍ*',
+        group: '*🍫 Esᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴘᴜᴇᴅᴇ sᴇʀ ᴇᴊᴇᴄᴜᴛᴀᴅᴏ ᴇɴ ɢʀᴜᴘᴏs*',
+        private: '*🌟 Esᴛᴀ ꜰᴜɴᴄɪᴏ́ɴ sᴏʟᴏ ᴘᴜᴇᴅᴇ sᴇʀ ᴇᴊᴇᴄᴜᴛᴀᴅᴀ ᴇɴ ᴍɪ ᴄʜᴀᴛ ᴘʀɪᴠᴀᴅᴏ*',
+        admin: '*🌟 Esᴛᴇ ᴄᴏᴍᴀɴᴅᴏ sᴏʟᴏ ᴘᴜᴇᴅᴇ sᴇʀ ᴜᴛɪʟɪᴢᴀᴅᴏ ᴘᴏʀ ʟᴏs ᴀᴅᴍɪɴs ᴅᴇʟ ɢʀᴜᴘᴏ*!!',
+        botAdmin: '*🍭 Pᴀʀᴀ ᴘᴏᴅᴇʀ ᴜsᴀʀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ ᴇs ɴᴇᴄᴇsᴀʀɪᴏ ǫᴜᴇ ʏᴏ sᴇᴀ ᴀᴅᴍɪɴ!!*',
+        restrict: '*🍭 Esᴛᴀ ꜰᴜɴᴄɪᴏ́ɴ ᴇsᴛᴀ ᴅᴇsᴀᴄᴛɪᴠᴀᴅᴀ ᴘᴏʀ ᴇʟ ᴀᴄᴛᴜᴀʟ ᴏᴡɴᴇʀ*'
+    }[type];
+    if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('🚫'))
 }
 
 let file = global.__filename(import.meta.url, true)
