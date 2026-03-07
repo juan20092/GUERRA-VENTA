@@ -38,7 +38,7 @@ handler.all = async function (m, { conn }) {
   }
 
   // Mock data for testing
-  global.dev = 'Dev Juan'
+  global.dev = '𝐕𝐈𝐏 𝐁𝐎𝐓 ❤️'
   global.botname = '𝐕𝐈𝐏 𝐁𝐎𝐓 ❤️'
   global.userJid = m.sender ? m.sender : '' 
 
