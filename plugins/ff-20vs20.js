@@ -76,8 +76,8 @@ let handler = async (m, { conn, args }) => {
     colText
   }
 }
-handler.help = ['20vs20']
-handler.tags = ['freefire']
+handler.help = ['20𝗏𝗌20']
+handler.tags = ['𝖥𝖱𝖤𝖤 𝖥𝖨𝖱𝖤']
 handler.command = /^\.?(20vs20|vs20)$/i
 handler.group = true
 handler.admin = true
@@ -87,7 +87,7 @@ function generarVersus(esc1, esc2, esc3, esc4, suplentes, mexText = '  ', colTex
   function formatEscuadra(arr) {
     let out = ''
     for (let i = 0; i < 4; i++) {
-      let icon = i === 0 ? '👑' : '🧑🏾‍💻'
+      let icon = i === 0 ? '👑' : '🥷🏻'
       out += arr[i] ? `${icon} ┇ @${arr[i].split('@')[0]}\n` : `${icon} ┇ \n`
     }
     return out.trimEnd()
@@ -95,7 +95,7 @@ function generarVersus(esc1, esc2, esc3, esc4, suplentes, mexText = '  ', colTex
   function formatSuplentes(arr) {
     let out = ''
     for (let i = 0; i < 2; i++) {
-      out += arr[i] ? `🧑🏾‍💻 ┇ @${arr[i].split('@')[0]}\n` : `🧑🏾‍💻 ┇ \n`
+      out += arr[i] ? `🥷🏻 ┇ @${arr[i].split('@')[0]}\n` : `🥷🏻 ┇ \n`
     }
     return out.trimEnd()
   }
@@ -126,7 +126,7 @@ ${formatSuplentes(suplentes)}
 
 *𝖲𝗈𝗅𝗈 𝗋𝖾𝖺𝖼𝖼𝗂𝗈𝗇𝖺 𝖼𝗈𝗇:*
 
-> 「 🎉 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
+> 「 ❤️ 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
 > 「 👍 」𝐒𝐮𝐩𝐥𝐞𝐧𝐭𝐞  
 > 「 👎 」𝐒𝐚𝐥𝐢𝐫 𝐃𝐞 𝐋𝐚 𝐋𝐢𝐬𝐭𝐚  
 > 「 ❌ 」𝐑𝐞𝐢𝐧𝐢𝐜𝐢𝐚𝐫 𝐋𝐢𝐬𝐭𝐚      
@@ -181,7 +181,7 @@ conn.ev.on('messages.upsert', async ({ messages }) => {
     data.escuadra4 = data.escuadra4.filter(u => u !== user)
     data.suplentes = data.suplentes.filter(u => u !== user)
 
-    if (emoji === '🎉') {
+    if (emoji === '❤️') {
       if (data.escuadra1.length < 4) data.escuadra1.push(user)
       else if (data.escuadra2.length < 4) data.escuadra2.push(user)
       else if (data.escuadra3.length < 4) data.escuadra3.push(user)
