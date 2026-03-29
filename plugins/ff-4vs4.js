@@ -1,4 +1,4 @@
-let versusData = {} // Guarda el estado por mensaje
+let versusData = {}
 
 const aliasesMX = ['mx', 'méxico', 'mexico', 'méx', 'mex']
 const aliasesCO = ['co', 'colombia', 'col']
@@ -73,8 +73,8 @@ let handler = async (m, { conn, args }) => {
     colText
   }
 }
-handler.help = ['4vs4']
-handler.tags = ['freefire']
+handler.help = ['4𝗏𝗌4']
+handler.tags = ['𝖥𝖱𝖤𝖤 𝖥𝖨𝖱𝖤']
 handler.command = /^\.?(4vs4|vs4)$/i
 handler.group = true
 export default handler
@@ -83,7 +83,7 @@ function generarVersus(escuadra, suplentes, mexText = '  ', colText = '  ') {
   function formatEscuadra(arr) {
     let out = ''
     for (let i = 0; i < 4; i++) { // máximo 4 jugadores
-      let icon = i === 0 ? '👑' : '🧑🏾‍💻'
+      let icon = i === 0 ? '👑' : '🥷🏻'
       out += arr[i] ? `${icon} ┇ @${arr[i].split('@')[0]}\n` : `${icon} ┇ \n`
     }
     return out.trimEnd() || '─ ┇ Sin jugadores'
@@ -92,12 +92,12 @@ function generarVersus(escuadra, suplentes, mexText = '  ', colText = '  ') {
   function formatSuplentes(arr) {
     let out = ''
     for (let i = 0; i < 2; i++) {
-      out += arr[i] ? `🧑🏾‍💻 ┇ @${arr[i].split('@')[0]}\n` : `🧑🏾‍💻 ┇ \n`
+      out += arr[i] ? `🥷🏻 ┇ @${arr[i].split('@')[0]}\n` : `🥷🏻 ┇ \n`
     }
     return out.trimEnd() || '─ ┇ Sin suplentes'
   }
 
-  return `*4 𝐕𝐒 4*
+  return `*4 𝐕𝐄𝐑𝐒𝐔𝐒 4*
 
 *𝐇𝐎𝐑𝐀𝐑𝐈𝐎𝐒*;
 *🇲🇽 MEXICO* : ${mexText}
@@ -114,7 +114,7 @@ ${formatSuplentes(suplentes)}
 
 *𝖲𝗈𝗅𝗈 𝗋𝖾𝖺𝖼𝖼𝗂𝗈𝗇𝖺 𝖼𝗈𝗇:*
 
-> 「 🎉 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
+> 「 ❤️ 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
 > 「 👍 」𝐒𝐮𝐩𝐥𝐞𝐧𝐭𝐞  
 > 「 👎 」𝐒𝐚𝐥𝐢𝐫 𝐃𝐞 𝐋𝐚 𝐋𝐢𝐬𝐭𝐚  
 > 「 ❌ 」𝐑𝐞𝐢𝐧𝐢𝐜𝐢𝐚𝐫 𝐋𝐢𝐬𝐭𝐚      
@@ -153,7 +153,6 @@ conn.ev.on('messages.upsert', async ({ messages }) => {
       // Borrar mensaje original
       try { await conn.sendMessage(data.chat, { delete: msg.message.reactionMessage.key }) } catch {}
 
-      // Enviar nuevo mensaje vacío
       let sent = await conn.sendMessage(data.chat, { text: nuevoTexto, mentions: [] })
       delete versusData[msgID]
       versusData[sent.key.id] = data
@@ -163,12 +162,11 @@ conn.ev.on('messages.upsert', async ({ messages }) => {
     data.escuadra = data.escuadra.filter(u => u !== user)
     data.suplentes = data.suplentes.filter(u => u !== user)
 
-    if (emoji === '🎉') {
+    if (emoji === '❤️') {
       if (data.escuadra.length < 4) data.escuadra.push(user)
     } else if (emoji === '👍') {
       if (data.suplentes.length < 2) data.suplentes.push(user)
     } else if (emoji === '👎') {
-      // Ya fue eliminado arriba
     } else continue
 
     let nuevoTexto = generarVersus(data.escuadra, data.suplentes, data.mexText, data.colText)
