@@ -1,4 +1,4 @@
-let versusData = {} // Guarda el estado por mensaje
+let versusData = {} 
 
 const aliasesMX = ['mx', 'méxico', 'mexico', 'méx', 'mex']
 const aliasesCO = ['co', 'colombia', 'col']
@@ -79,8 +79,8 @@ let handler = async (m, { conn, args }) => {
     colText
   }
 }
-handler.help = ['12vs12']
-handler.tags = ['freefire']
+handler.help = ['12𝗏𝗌12']
+handler.tags = ['𝖥𝖱𝖤𝖤 𝖥𝖨𝖱𝖤']
 handler.command = /^\.?(12vs12|vs12)$/i
 handler.group = true
 handler.admin = true
@@ -91,10 +91,10 @@ function generarVersus(esc1, esc2, esc3, suplentes, mexText = '  ', colText = ' 
     let out = ''
     for (let i = 0; i < 4; i++) {
       if (arr[i]) {
-        let icon = i === 0 ? '👑' : '🧑🏾‍💻'
+        let icon = i === 0 ? '👑' : '🥷🏻'
         out += `${icon} ┇ @${arr[i].split('@')[0]}\n`
       } else {
-        let icon = i === 0 ? '👑' : '🧑🏾‍💻'
+        let icon = i === 0 ? '👑' : '🥷🏻'
         out += `${icon} ┇ \n`
       }
     }
@@ -105,9 +105,9 @@ function generarVersus(esc1, esc2, esc3, suplentes, mexText = '  ', colText = ' 
     let out = ''
     for (let i = 0; i < 2; i++) {
       if (arr[i]) {
-        out += `🧑🏾‍💻 ┇ @${arr[i].split('@')[0]}\n`
+        out += `🥷🏻 ┇ @${arr[i].split('@')[0]}\n`
       } else {
-        out += `🧑🏾‍💻 ┇ \n`
+        out += `🥷🏻 ┇ \n`
       }
     }
     return out.trimEnd()
@@ -141,7 +141,7 @@ ${formatSuplentes(suplentes)}
 
 *𝖲𝗈𝗅𝗈 𝗋𝖾𝖺𝖼𝖼𝗂𝗈𝗇𝖺 𝖼𝗈𝗇:*
 
-> 「 🎉 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
+> 「 ❤️ 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
 > 「 👍 」𝐒𝐮𝐩𝐥𝐞𝐧𝐭𝐞  
 > 「 👎 」𝐒𝐚𝐥𝐢𝐫 𝐃𝐞 𝐋𝐚 𝐋𝐢𝐬𝐭𝐚  
 > 「 ❌ 」𝐑𝐞𝐢𝐧𝐢𝐜𝐢𝐚𝐫 𝐋𝐢𝐬𝐭𝐚        
@@ -199,7 +199,7 @@ conn.ev.on('messages.upsert', async ({ messages }) => {
     data.escuadra3 = data.escuadra3.filter(u => u !== user)
     data.suplentes = data.suplentes.filter(u => u !== user)
 
-    if (emoji === '🎉') {
+    if (emoji === '❤️') {
       if (data.escuadra1.length < 4) data.escuadra1.push(user)
       else if (data.escuadra2.length < 4) data.escuadra2.push(user)
       else if (data.escuadra3.length < 4) data.escuadra3.push(user)
@@ -222,6 +222,11 @@ conn.ev.on('messages.upsert', async ({ messages }) => {
       text: nuevoTexto,
       mentions
     })
+
+    delete versusData[msgID]
+    versusData[sent.key.id] = data
+  }
+})
 
     delete versusData[msgID]
     versusData[sent.key.id] = data
