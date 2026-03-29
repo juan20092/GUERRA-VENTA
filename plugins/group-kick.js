@@ -1,7 +1,7 @@
 var handler = async (m, { conn, participants, usedPrefix, command, rcanal }) => {
 	let mentionedJid = await m.mentionedJid;
 	let user = mentionedJid && mentionedJid.length ? mentionedJid[0] : m.quoted && await m.quoted.sender ? await m.quoted.sender : null;
-	if (!user) return conn.reply(m.chat, `🌟 *𝙼𝙴𝙽𝙲𝙸𝙾𝙽𝙰 𝙰𝙻 𝚄𝚂𝙴𝚁 𝚀𝚄𝙸𝙴𝚁𝙴𝚂 𝚂𝙰𝙲𝙰𝚁 𝙾 𝚁𝙴𝚂𝙿𝙾𝙽𝙳𝙴 𝚄𝙽 𝙼𝙴𝙽𝚂𝙰𝙹𝙴*`, m, rcanal);
+	if (!user) return conn.reply(m.chat, `> ➤『  𝗠𝗘𝗡𝗖𝗜𝗢𝗡𝗔 𝗔 𝗨𝗡𝗔 𝗣𝗘𝗥𝗦𝗢𝗡𝗔 𝗤𝗨𝗘 𝗗𝗘𝗦𝗘𝗔𝗦 𝗘𝗟𝗜𝗠𝗜𝗡𝗔𝗥 🌟』 `, m, rcanal);
 	try {
 		const groupInfo = await conn.groupMetadata(m.chat);
 		const ownerGroup = groupInfo.owner || m.chat.split`-`[0] + '@s.whatsapp.net';
