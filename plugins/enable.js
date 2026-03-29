@@ -20,7 +20,7 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
 ┃ Antiprivado: ${estado(bot.antiPrivate)} 
 ┃ Audios: ${estado(chat.audios)}
 ┃ NSFW: ${estado(chat.nsfw)}
-╰━━━━━━━━━━━━━━━━⬣`.trim()
+╰━━━━━━━━━━━━⬣`.trim()
     return m.reply(texto)
   }
 
