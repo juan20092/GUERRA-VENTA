@@ -74,8 +74,8 @@ let handler = async (m, { conn, args }) => {
     colText
   }
 }
-handler.help = ['8vs8']
-handler.tags = ['freefire']
+handler.help = ['8𝗏𝗌8']
+handler.tags = ['𝖥𝖱𝖤𝖤 𝖥𝖨𝖱𝖤']
 handler.command = /^\.?(8vs8|vs8)$/i
 handler.group = true
 export default handler
@@ -84,7 +84,7 @@ function generarVersus(esc1, esc2, suplentes, suplentes2, mexText = '  ', colTex
   function formatEscuadra(arr) {
     let out = ''
     for (let i = 0; i < 4; i++) { // 4 jugadores por escuadra
-      let icon = i === 0 ? '👑' : '🧑🏾‍💻'
+      let icon = i === 0 ? '👑' : '🥷🏻'
       out += arr[i] ? `${icon} ┇ @${arr[i].split('@')[0]}\n` : `${icon} ┇ \n`
     }
     return out.trimEnd()
@@ -93,12 +93,12 @@ function generarVersus(esc1, esc2, suplentes, suplentes2, mexText = '  ', colTex
   function formatSuplentes(arr) {
     let out = ''
     for (let i = 0; i < 2; i++) {
-      out += arr[i] ? `🧑🏾‍💻 ┇ @${arr[i].split('@')[0]}\n` : `🧑🏾‍💻 ┇ \n`
+      out += arr[i] ? `🥷🏻 ┇ @${arr[i].split('@')[0]}\n` : `🥷🏻 ┇ \n`
     }
     return out.trimEnd()
   }
 
-  return `*8 𝐕𝐒 8*
+  return `*8 𝐕𝐄𝐑𝐒𝐔𝐒 8*
 
 *𝐇𝐎𝐑𝐀𝐑𝐈𝐎𝐒*;
 *🇲🇽 MEXICO* : ${mexText}
@@ -118,7 +118,7 @@ ${formatSuplentes(suplentes)}
 
 *𝖲𝗈𝗅𝗈 𝗋𝖾𝖺𝖼𝖼𝗂𝗈𝗇𝖺 𝖼𝗈𝗇:*
 
-> 「 🎉 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
+> 「 ❤️ 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
 > 「 👍 」𝐒𝐮𝐩𝐥𝐞𝐧𝐭𝐞  
 > 「 👎 」𝐒𝐚𝐥𝐢𝐫 𝐃𝐞 𝐋𝐚 𝐋𝐢𝐬𝐭𝐚  
 > 「 ❌ 」𝐑𝐞𝐢𝐧𝐢𝐜𝐢𝐚𝐫 𝐋𝐢𝐬𝐭𝐚      
@@ -167,7 +167,7 @@ conn.ev.on('messages.upsert', async ({ messages }) => {
     data.escuadra2 = data.escuadra2.filter(u => u !== user)
     data.suplentes = data.suplentes.filter(u => u !== user)
 
-    if (emoji === '🎉') {
+    if (emoji === '❤️') {
       if (data.escuadra1.length < 4) data.escuadra1.push(user)
       else if (data.escuadra2.length < 4) data.escuadra2.push(user)
     } else if (emoji === '👍') {
