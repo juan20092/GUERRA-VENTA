@@ -8,14 +8,14 @@ const handler = async (m, { conn, participants, groupMetadata }) => {
 
   const titulo = `*╭〔 𝙈𝙀𝙉𝘾𝙄𝙊́𝙉 𝙂𝙀𝙉𝙀𝙍𝘼𝙇 〕╮*`;
   const subtitulo = `*│* *${groupName}*`;
-  const info = `*│* *Para ${total} miembros*  ❤️`;
+  const info = `*│* *Para ${total} miembros*  🌟`;
   const separador = `*╰───────────╯*\n`;
 
   // Menciones en formato bonito (en columnas)
   const lines = participants.map((u, i) => {
     const numero = (u.id || '').split('@')[0];
     // Cambia el número por el emoji ❤️
-    return `❤️ @${numero}`;
+    return `➤ 🌟 @${numero}`;
   });
 
   // (Opcional) divide el bloque para que no se vea eterno en grupos grandes
@@ -25,7 +25,7 @@ const handler = async (m, { conn, participants, groupMetadata }) => {
     chunks.push(lines.slice(i, i + chunkSize).join('\n'));
   }
 
-  await conn.sendMessage(m.chat, { react: { text: '❤️', key: m.key } });
+  await conn.sendMessage(m.chat, { react: { text: '🌟', key: m.key } });
 
   for (let i = 0; i < chunks.length; i++) {
     const header =
