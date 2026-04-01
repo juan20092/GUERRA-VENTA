@@ -23,7 +23,7 @@ const handler = async (m, { conn, usedPrefix }) => {
 
     // Puedes cambiar estos videos por los de tu preferencia o los que usas normalmente.
     const videos = [
-      'https://n.uguu.se/BbJoVVRF.mp4',
+      'https://api.dix.lat/media2/1775087333113.mp4',
     ]
     let video = videos[Math.floor(Math.random() * videos.length)]
 
@@ -148,7 +148,7 @@ const handler = async (m, { conn, usedPrefix }) => {
     await conn.sendMessage(
       m.chat,
       {
-        video: { url: 'https://n.uguu.se/BbJoVVRF.mp4' },
+        video: { url: 'https://api.dix.lat/media2/1775087333113.mp4' },
         caption: menuText,
         gifPlayback: true,
         contextInfo: {
