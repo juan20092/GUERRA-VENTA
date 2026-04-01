@@ -33,14 +33,20 @@ export async function before(m, { conn, participants}) {
   if (chat.detect && m.messageStubType == 2) {
     const chatId = m.isGroup ? m.chat : m.sender;
     const uniqid = chatId.split('@')[0];
-    const sessionPath = './Session/';
+    const sessionCandidates = [
+      `./${global.sessions || 'Session'}/`,
+      './Session/',
+      './session/'
+    ];
+    const sessionPath = sessionCandidates.find(p => existsSync(p));
+    if (!sessionPath) return;
+
     const files = await fs.readdir(sessionPath);
     let filesDeleted = 0;
     for (const file of files) {
       if (file.includes(uniqid)) {
         await fs.unlink(path.join(sessionPath, file));
         filesDeleted++;
-        console.log(`⚠️ Eliminación session (PreKey) que provocan el undefined en el chat`);
       }
     }
   } else if (chat.detect && m.messageStubType == 21) {
