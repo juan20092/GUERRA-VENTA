@@ -150,11 +150,11 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
 *• 𝘌𝘫𝘦𝘮𝘱𝘭𝘰:* ${usedPrefix + command} welcome`.trim())
   }
 
-  m.reply(`⚠️ 「 𝘼𝙫𝙞𝙨𝙤 」\n\n❶ *𝙲𝙾𝙼𝙰𝙽𝙳𝙾:* *${type}*\n❷ *${isEnable ? '𝙰𝙲𝚃𝙸𝚅𝙰𝙳𝙾' : '𝙳𝙴𝚂𝙰𝙲𝚃𝙸𝚅𝙰𝙳'}* ${isAll ? '*𝙴𝙽 𝙴𝚂𝚃𝙴 𝙱𝙾𝚃*' : '*𝙴𝙽 𝙴𝚂𝚃𝙴 𝙶𝚁𝚄𝙿𝙾*'}`)
+  m.reply(`⚠️ 「 𝘼𝙫𝙞𝙨𝙤 」\n\n❶ *𝙲𝙾𝙼𝙰𝙽𝙳𝙾:* *${type}*\n❷ *${isEnable ? '𝙰𝙲𝚃𝙸𝚅𝙰𝙳𝙾' : '𝙳𝙴𝚂𝙰𝙲𝚃𝙸𝚅𝙰𝙳𝙾'}* ${isAll ? '*𝙴𝙽 𝙴𝚂𝚃𝙴 𝙱𝙾𝚃*' : '*𝙴𝙽 𝙴𝚂𝚃𝙴 𝙶𝚁𝚄𝙿𝙾*'}`)
 }
 
 handler.help = ['enable', 'disable']
-handler.tags = ['nable']
+handler.tags = ['enable']
 handler.command = /^(enable|disable|on|off|1|0)$/i
 
 export default handler
