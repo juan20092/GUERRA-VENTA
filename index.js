@@ -37,8 +37,8 @@ const { chain } = lodash
 const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
-console.log(chalk.magentaBright('\nIniciando ViPPlus...'))
-say('Gachiakuta', {
+console.log(chalk.magentaBright('\nIniciando GUERRA...'))
+say('GUERRA', {
 font: 'block',
 align: 'center',
 gradient: ['grey', 'white']
