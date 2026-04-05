@@ -1,42 +1,36 @@
-const handler = async (m, { isOwner, isAdmin, conn, args, participants }) => {
-  // Verifica permisos
-  let canal = (typeof rcanal !== 'undefined') ? rcanal : (global.rcanal || '');
-  if (!(isAdmin || isOwner)) {
-    global.dfail('admin', m, canal, conn);
-    throw false;
+let handler = async (m, { conn, participants, groupMetadata, text }) => {
+  if (!m.isGroup) return m.reply('❌ Solo funciona en grupos')
+
+  let usuarios = participants.map(v => v.id)
+  let total = participants.length
+  let groupName = groupMetadata.subject
+  let mensaje = text ? text : 'Atención grupo'
+
+  let teks = `╭━━━〔 ⚡ LLAMADO GLOBAL ⚡ 〕━━━⬣
+┃ 🛸 Grupo: ${groupName}
+┃ 👥 Miembros: ${total}
+┃ 📣 Aviso: ${mensaje}
+╰━━━━━━━━━━━━━━━━⬣
+
+┏━━━〔 🔥 INVOCADOS 🔥 〕━━━⬣
+`
+
+  for (let user of participants) {
+    teks += `┃ ⚔️ @${user.id.split('@')[0]}\n`
   }
 
-  // Obtiene datos del grupo
-  const pesan = args.join(' ');
-  const groupMetadata = await conn.groupMetadata(m.chat);
-  const groupName = groupMetadata.subject;
-  const total = participants.length;
+  teks += `┗━━━━━━━━━━━━━━━━⬣
 
-  // Reacciona al mensaje
-  await conn.sendMessage(m.chat, { react: { text: '🔪', key: m.key } });
+👑 GUERRA BOT • ACTIVADO 👑`
 
-  // Construye el texto de mención con formato de columna
-  let mentionText = '';
-  mentionText += '┏━━━━━━━━━━━┓\n';
-  mentionText += `┃  🛸 𝖦𝗋𝗎𝗉𝗈: ${groupName}\n`;
-  mentionText += `┃  👥 𝖬𝗂𝖾𝗆𝖻𝗋𝗈𝗌: ${total}\n`;
-  mentionText += '┗━━━━━━━━━━━┛\n';
-  if (pesan) mentionText += `${pesan}\n`;
-  mentionText += '┌──⭓ *Despierten*\n';
-  mentionText += participants.map(mem => `🍷 @${mem.id.split('@')[0]}`).join('\n');
-  mentionText += '\n└───────⭓\n\n𝘚𝘶𝘱𝘦𝘳 𝘉𝘰𝘵 𝘞𝘩𝘢𝘵𝘴𝘈𝘱𝘱 🔪';
-
-  // Envía la imagen con el texto y menciones
   await conn.sendMessage(m.chat, {
-    image: { url: 'https://api.dix.lat/media2/1775096396469.jpg' },
-    caption: mentionText,
-    gifPlayback: true,
-    mentions: participants.map(a => a.id)
-  }, { quoted: m });
-};
+    image: { url: 'https://api.dix.lat/media/img_1775195377061_9uFt_bPM2.jpg' },
+    caption: teks,
+    mentions: usuarios
+  }, { quoted: m })
+}
 
-handler.customPrefix = /^\.?todos$/i;
-handler.command = new RegExp();
-handler.group = true;
-handler.admin = true;
-export default handler;
+handler.command = ['todos']
+handler.tags = ['group']
+
+export default handler
