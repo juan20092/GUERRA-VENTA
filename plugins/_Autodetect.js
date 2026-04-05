@@ -6,7 +6,7 @@ export async function before(m, { conn, participants}) {
 
   let usuario = `@${m.sender.split`@`[0]}`
 
-  let pp = await conn.getFile('https://files.catbox.moe/nh2sz1.jpg')
+  let pp = await conn.getFile('https://api.dix.lat/media/img_1775425059700_A2JEKKCkf.jpg')
     .then(r => r.data)
 
   let fkontak = {
