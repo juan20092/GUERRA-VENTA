@@ -18,7 +18,7 @@ export async function before(m, { conn, participants}) {
     },
     message: {
       locationMessage: {
-        name: '𝐕𝐈𝐏 𝐁𝐎𝐓',
+        name: 'GUERRA 𝐁𝐎𝐓',
         jpegThumbnail: pp
       }
     },
