@@ -38,16 +38,16 @@ handler.all = async function (m, { conn }) {
   }
 
   // Mock data for testing
-  global.dev = '𝐕𝐈𝐏 𝐁𝐎𝐓 ❤️'
-  global.botname = '𝐕𝐈𝐏 𝐁𝐎𝐓 ❤️'
+  global.dev = 'GUERRA BOT👑'
+  global.botname = 'GUERRA BOT👑'
   global.userJid = m.sender ? m.sender : '' 
 
   // Redes y canales
   global.redes = 'https://whatsapp.com/channel/0029VbARAwbEgGfOsCN1T10V'
   global.canalIdM = ["120363419404216418@newsletter", "120363419404216418@newsletter"]
   global.canalNombreM = [
-    "ꘓ ✧ 𝖩𝗎𝖺𝗇 𝖡𝗈𝗍𝗌 ┆𝖮𝖿𝗂𝖼𝗂𝖺𝗅 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 ❖ 🍷 ꘔ",
-    "ꘓ ✧ 𝖩𝗎𝖺𝗇 𝖡𝗈𝗍𝗌 ┆𝖮𝖿𝗂𝖼𝗂𝖺𝗅 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 ❖ 🍷 ꘔ"
+    "ꘓ ✧ GUERRA BOT┆𝖮𝖿𝗂𝖼𝗂𝖺𝗅 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 ❖ 🍷 ꘔ",
+    "ꘓ ✧ GUERRA BOT┆𝖮𝖿𝗂𝖼𝗂𝖺𝗅 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 ❖ 🍷 ꘔ"
   ]
 
   async function getRandomChannel() {
@@ -94,7 +94,7 @@ handler.all = async function (m, { conn }) {
 
   // Imágenes random
   const imgs = [
-    'https://files.catbox.moe/28rxrs.jpg'
+    'https://dix.lat/media3/image/upload/v1775255616/ab46fbb0e5341fe1bc32.jpg'
   ]
   global.img = pickRandom(imgs)
 
