@@ -1,18 +1,18 @@
 <!-- Banner -->
 <h1 align="center">
-  <img src="https://files.catbox.moe/gx1ipj.jpg" width="700" alt="𝐕𝐈𝐏 𝐁𝐎𝐓"/>
+  <img src="https://api.dix.lat/media/img_1775425059700_A2JEKKCkf.jpg" width="700" alt="GUERRA 𝐁𝐎𝐓"/>
   <br>
-  🗡️ 𝐕𝐈𝐏 𝐁𝐎𝐓 🗡️
+  🗡️ GUERRA 𝐁𝐎𝐓 🗡️
 </h1>
 
-# 𝑽𝑰𝑷 𝑩𝑶𝑻
+# GUERRA 𝑩𝑶𝑻
 
-¡Bienvenido a 𝑽𝑰𝑷 𝑩𝑶𝑻!
+¡Bienvenido a GUERRA 𝑩𝑶𝑻!
 
 🔪 𝐁𝐎𝐓 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐃𝐄 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 🔪
 
 ╔════🔪════╗
-   🔪 𝐕 𝐈 𝐏  -  𝐁 𝐎 𝐓 🔪
+   🔪 G U E R R A  -  𝐁 𝐎 𝐓 🔪
 ╚════🔪════╝
          ▄︻デ══━一⁠
 
