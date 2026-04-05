@@ -4,18 +4,17 @@ import { fileURLToPath } from 'url'
 
 global.owner = [
 [ '165043362652249', 'JUAN OFC', true ],
-[ '5575505117377', 'Ayudante', true ],
-[ '207237071036575', 'Ayudante', true ],
+[ '34016526909591', 'Ayudante', true ]
   ]
 global.mods = []
 global.prems = []
 
 global.emoji = '🍡'
 global.emoji2 = '🍥'
-global.namebot = '𝐕𝐈𝐏 𝐁𝐎𝐓 🗡️'
-global.botname = '𝐕𝐈𝐏 𝐁𝐎𝐓 🗡️'
-global.banner = 'https://files.catbox.moe/28rxrs.jpg'
-global.packname = '𝐕𝐈𝐏 𝐁𝐎𝐓 🗡️'
+global.namebot = 'GUERRA BOT👑'
+global.botname = 'GUERRA BOT👑'
+global.banner = 'https://dix.lat/media3/image/upload/v1775255616/ab46fbb0e5341fe1bc32.jpg'
+global.packname = 'GUERRA BOT👑'
 global.author = '© 𝙋𝙤𝙬𝙚𝙧𝙚𝙙 𝔍𝒖𝒂𝒏'
 global.moneda = 'MayCoins'
 global.libreria = 'Baileys'
@@ -27,7 +26,7 @@ global.sessions = 'VipBot'
 global.jadi = 'VipBots'
 global.yukiJadibts = true
 
-global.namecanal = 'ꘓ ✧ 𝖩𝗎𝖺𝗇 𝖡𝗈𝗍𝗌 ┆𝖮𝖿𝗂𝖼𝗂𝖺𝗅 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 ❖ 🍷 ꘔ'
+global.namecanal = 'ꘓ ✧ GUERRA BOT ┆𝖮𝖿𝗂𝖼𝗂𝖺𝗅 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 ❖ 🍷 ꘔ'
 global.idcanal = '120363419404216418@newsletter'
 global.idcanal2 = '120363419404216418@newsletter'
 global.canal = 'https://whatsapp.com/channel/0029VbARAwbEgGfOsCN1T10V'
