@@ -65,26 +65,12 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 ┃ ✦ ${_p}6vs6
 ┃ ✦ ${_p}12vs12
 ┃ ✦ ${_p}16vs16
+┃ ✦ ${_p}20vs20
 ┃ ✦ ${_p}24vs24
-╰━━━━━━━━━━━━⬣
-
-╭━━〔 🔫 BLOOD ZONE 〕━━━⬣
-┃ ✦ ${_p}rank
-┃ ✦ ${_p}stats
-┃ ✦ ${_p}mapas
-┃ ✦ ${_p}armas
-┃ ✦ ${_p}clan
-┃ ✦ ${_p}inscribirse4
 ╰━━━━━━━━━━━━⬣
 
 ╭━━〔 📥 DESCARGAS 〕━━━⬣
 ┃ ✦ ${_p}play
-┃ ✦ ${_p}ytmp3
-┃ ✦ ${_p}ytmp4
-┃ ✦ ${_p}tiktok
-┃ ✦ ${_p}mediafire
-┃ ✦ ${_p}apk
-┃ ✦ ${_p}instagram
 ╰━━━━━━━━━━━━⬣
 
 ╭━━〔 🖼️ STICKERS 〕━━━⬣
@@ -93,6 +79,11 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 ┃ ✦ ${_p}qc
 ┃ ✦ ${_p}toimg
 ┃ ✦ ${_p}brat
+┃ ✦ ${_p}pfp
+┃ ✦ ${_p}scat
+┃ ✦ ${_p}googleimg
+┃ ✦ ${_p}hd
+┃ ✦ ${_p}iqc
 ╰━━━━━━━━━━━━⬣
 
 ╭━━〔 🛠️ GROUP CONTROL 〕━━⬣
@@ -103,6 +94,25 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 ┃ ✦ ${_p}promote
 ┃ ✦ ${_p}demote
 ┃ ✦ ${_p}link
+┃ ✦ ${_p}mute
+┃ ✦ ${_p}unmute
+┃ ✦ ${_p}setname
+┃ ✦ ${_p}horario
+┃ ✦ ${_p}resetlink
+┃ ✦ ${_p}encuesta
+┃ ✦ ${_p}fantasmas
+┃ ✦ ${_p}setbye
+┃ ✦ ${_p}setwelcome
+┃ ✦ ${_p}ping
+╰━━━━━━━━━━━━⬣
+
+╭━━〔 ⚙️ BOT STATUS 〕━━⬣
+┃ ✦ ${_p}on
+┃ ✦ ${_p}off
+┃ ✦ ${_p}antiprivado
+┃ ✦ ${_p}antilink
+┃ ✦ ${_p}welcome
+┃ ✦ ${_p}modoadmin
 ╰━━━━━━━━━━━━⬣
 
 ╭━━〔 👑 OWNER GUERRA 〕━━⬣
@@ -113,6 +123,39 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 ┃ ✦ ${_p}autoadmin
 ┃ ✦ ${_p}join
 ┃ ✦ ${_p}update
+┃ ✦ ${_p}setnamebot
+┃ ✦ ${_p}lid
+╰━━━━━━━━━━━━⬣
+
+╭━━〔 🎭 DIVERSIÓN 〕━━⬣
+┃ ✦ ${_p}gay
+┃ ✦ ${_p}formarpareja
+┃ ✦ ${_p}adoptado
+┃ ✦ ${_p}adoptada
+┃ ✦ ${_p}alienigena
+┃ ✦ ${_p}aliens
+┃ ✦ ${_p}follar
+┃ ✦ ${_p}penetrar
+┃ ✦ ${_p}pack
+┃ ✦ ${_p}videoxxx
+┃ ✦ ${_p}amigorandom
+┃ ✦ ${_p}asustar
+┃ ✦ ${_p}carrera
+┃ ✦ ${_p}chistes
+┃ ✦ ${_p}consejo
+┃ ✦ ${_p}doxeo
+┃ ✦ ${_p}facto
+┃ ✦ ${_p}formartrios
+┃ ✦ ${_p}gordopantene
+┃ ✦ ${_p}gordoteton
+┃ ✦ ${_p}kiss
+┃ ✦ ${_p}love
+┃ ✦ ${_p}mamaguevo
+┃ ✦ ${_p}oracion
+┃ ✦ ${_p}paja
+┃ ✦ ${_p}piropos
+┃ ✦ ${_p}meme
+┃ ✦ ${_p}coger
 ╰━━━━━━━━━━━━⬣
 `
 
