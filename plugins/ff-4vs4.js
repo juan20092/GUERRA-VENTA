@@ -1,25 +1,30 @@
-let versusData4 = {}
+let versusData = {}
+let isReactionHandlerRegistered = false
 
-const aliasesMX4 = ['mx', 'méxico', 'mexico', 'méx', 'mex']
-const aliasesCO4 = ['co', 'colombia', 'col']
+const aliasesMX = ['mx', 'méxico', 'mexico', 'méx', 'mex']
+const aliasesCO = ['co', 'colombia', 'col']
 
-let handler4vs4 = async (m, { conn, args }) => {
-  if (!args.length) {
-    return conn.sendMessage(m.chat, { text: '❌ Debes especificar la hora y el país. Ej: .4vs4 3 pm mx' })
+let handler = async (m, { conn, args }) => {
+  registerReactionHandler(conn)
+
+  if (args.length === 0) {
+    await conn.sendMessage(m.chat, { text: '𝐓𝐢𝐞𝐧𝐞𝐬 𝐪𝐮𝐞 𝐞𝐬𝐩𝐞𝐜𝐢𝐟𝐢𝐜𝐚𝐫 𝐥𝐚 𝐡𝐨𝐫𝐚 𝐲 𝐞𝐥 𝐩𝐚𝐢́𝐬 ❇️' })
+    return
   }
 
   let lastArgRaw = args[args.length - 1]
   let lastArg = lastArgRaw.toLowerCase().replace(/,$/, '')
 
   let zonaInput = null
-  if (aliasesMX4.includes(lastArg)) {
+  if (aliasesMX.includes(lastArg)) {
     zonaInput = 'mx'
     args.pop()
-  } else if (aliasesCO4.includes(lastArg)) {
+  } else if (aliasesCO.includes(lastArg)) {
     zonaInput = 'co'
     args.pop()
   } else {
-    return conn.sendMessage(m.chat, { text: '❌ País inválido. Usa: mx o co' })
+    await conn.sendMessage(m.chat, { text: '𝐄𝐬𝐩𝐞𝐜𝐢𝐟𝐢𝐜𝐚 𝐮𝐧 𝐩𝐚𝐢́𝐬 𝐯𝐚́𝐥𝐢𝐝𝐨.\nEj: 𝟑 𝐩𝐦 𝐦𝐱, 𝟏𝟔 𝐜𝐨, 𝟒 𝐩𝐦 𝐦é𝐱𝐢𝐜𝐨' })
+    return
   }
 
   const timeStr = args.join(' ').toUpperCase().trim()
@@ -37,26 +42,33 @@ let handler4vs4 = async (m, { conn, args }) => {
   }
 
   if (horaInput === null) {
-    return conn.sendMessage(m.chat, { text: '❌ Hora inválida. Ej: .4vs4 3 pm mx' })
+    await conn.sendMessage(m.chat, { text: '𝐇𝐨𝐫𝐚 𝐢𝐧𝐯𝐚́𝐥𝐢𝐝𝐚. Ej:\n.4vs4 3 pm mx\n.4vs4 16 co' })
+    return
   }
 
-  const format12h = (h) => {
+  function format12h(h) {
     let ampm = h >= 12 ? 'PM' : 'AM'
     let hour12 = h % 12
     if (hour12 === 0) hour12 = 12
     return `${hour12} ${ampm}`
   }
 
-  let mexHora = zonaInput === 'mx' ? horaInput : (horaInput + 23) % 24
-  let colHora = zonaInput === 'co' ? horaInput : (horaInput + 1) % 24
+  let mexHora, colHora
+  if (zonaInput === 'mx') {
+    mexHora = horaInput
+    colHora = (horaInput + 1) % 24
+  } else {
+    colHora = horaInput
+    mexHora = (horaInput + 23) % 24
+  }
 
   const mexText = format12h(mexHora)
   const colText = format12h(colHora)
 
-  const template = generarVersus4vs4([], [], mexText, colText)
+  const template = generarVersus([], [], mexText, colText)
   const sent = await conn.sendMessage(m.chat, { text: template, mentions: [] })
 
-  versusData4[sent.key.id] = {
+  versusData[sent.key.id] = {
     chat: m.chat,
     escuadra: [],
     suplentes: [],
@@ -64,17 +76,16 @@ let handler4vs4 = async (m, { conn, args }) => {
     colText
   }
 }
+handler.help = ['4𝗏𝗌4']
+handler.tags = ['𝖥𝖱𝖤𝖤 𝖥𝖨𝖱𝖤']
+handler.command = /^\.?(4vs4|vs4)$/i
+handler.group = true
+export default handler
 
-handler4vs4.help = ['4vs4']
-handler4vs4.tags = ['Games']
-handler4vs4.command = /^\.?(4vs4|vs4)$/i
-handler4vs4.group = true
-export default handler4vs4
-
-function generarVersus4vs4(escuadra, suplentes, mexText = '  ', colText = '  ') {
+function generarVersus(escuadra, suplentes, mexText = '  ', colText = '  ') {
   function formatEscuadra(arr) {
     let out = ''
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 4; i++) { // máximo 4 jugadores
       let icon = i === 0 ? '👑' : '🥷🏻'
       out += arr[i] ? `${icon} ┇ @${arr[i].split('@')[0]}\n` : `${icon} ┇ \n`
     }
@@ -89,76 +100,93 @@ function generarVersus4vs4(escuadra, suplentes, mexText = '  ', colText = '  ') 
     return out.trimEnd() || '─ ┇ Sin suplentes'
   }
 
-  return `4 𝐕𝐒 4
+  return `*4 𝐕𝐄𝐑𝐒𝐔𝐒 4*
 
-𝐇𝐎𝐑𝐀𝐑𝐈𝐎𝐒;
-🇲🇽 MEXICO : ${mexText}
-🇨🇴 COLOMBIA : ${colText}
+*𝐇𝐎𝐑𝐀𝐑𝐈𝐎𝐒*;
+*🇲🇽 MEXICO* : ${mexText}
+*🇨🇴 COLOMBIA* : ${colText}
 
-𝐉𝐔𝐆𝐀𝐃𝐎𝗥𝐄𝗦 𝐏𝐑𝐄𝐒𝐄𝗡𝐓𝐄𝗦;
+*𝐉𝐔𝐆𝐀𝐃𝐎𝐑𝐄𝐒 𝐏𝐑𝐄𝐒𝐄𝐍𝐓𝐄𝐒*;
 
-𝗘𝗦𝗖𝗨𝗔𝗗𝐑𝐀 Ú𝗡𝐈𝗖𝐀
+*𝗘𝗦𝗖𝗨𝗔𝗗𝗥𝗔 Ú𝗡𝗜𝗖𝗔*
 ${formatEscuadra(escuadra)}
 
-ㅤʚ 𝐒𝐔𝐏𝐋𝐄𝐍𝐓𝐄𝗦:
+ㅤʚ *𝐒𝐔𝐏𝐋𝐄𝐍𝐓𝐄𝐒*:
 ${formatSuplentes(suplentes)}
 
-𝖲𝗈𝗅𝗈 𝗋𝖾𝖺𝖼𝖼𝗂𝗈𝗇𝖺 𝖼𝗈𝗇:
 
-> 「 ❤️ 」Participar  
-> 「 👍 」Suplente  
-> 「 👎 」Salir de la lista  
-> 「 ❌ 」Reiniciar lista
+*𝖲𝗈𝗅𝗈 𝗋𝖾𝖺𝖼𝖼𝗂𝗈𝗇𝖺 𝖼𝗈𝗇:*
+
+> 「 ❤️ 」𝐏𝐚𝐫𝐭𝐢𝐜𝐢𝐩𝐚𝐫  
+> 「 👍 」𝐒𝐮𝐩𝐥𝐞𝐧𝐭𝐞  
+> 「 👎 」𝐒𝐚𝐥𝐢𝐫 𝐃𝐞 𝐋𝐚 𝐋𝐢𝐬𝐭𝐚  
+> 「 ❌ 」𝐑𝐞𝐢𝐧𝐢𝐜𝐢𝐚𝐫 𝐋𝐢𝐬𝐭𝐚      
 `
 }
 
-// Manejo de reacciones
-conn.ev.on('messages.upsert', async ({ messages }) => {
-  for (let msg of messages) {
-    if (!msg.message?.reactionMessage) continue
-    let msgID = msg.message.reactionMessage.key.id
-    let data = versusData4[msgID]
-    if (!data) continue
+function registerReactionHandler(conn) {
+  if (isReactionHandlerRegistered) return
+  isReactionHandlerRegistered = true
 
-    let user = msg.key.participant || msg.key.remoteJid
-    let emoji = msg.message.reactionMessage.text
+  conn.ev.on('messages.upsert', async ({ messages }) => {
+    for (let msg of messages) {
+      if (!msg.message?.reactionMessage) continue
 
-    const isInAnyList = data.escuadra.includes(user) || data.suplentes.includes(user)
-    if (emoji === '👎' && !isInAnyList) continue
+      let msgID = msg.message.reactionMessage.key.id
+      let data = versusData[msgID]
+      if (!data) continue
 
-    // Validación de admin
-    let isAdmin = false
-    try {
-      let groupMetadata = await conn.groupMetadata(data.chat)
-      let participant = groupMetadata.participants.find(p => p.id === user)
-      isAdmin = participant?.admin === 'admin' || participant?.admin === 'superadmin'
-    } catch {}
+      let user = msg.key.participant || msg.key.remoteJid
+      let emoji = normalizeReaction(msg.message.reactionMessage.text)
+      const isInAnyList =
+        data.escuadra.includes(user) ||
+        data.suplentes.includes(user)
 
-    if (emoji === '❌' && isAdmin) {
-      data.escuadra = []
-      data.suplentes = []
-      let nuevoTexto = generarVersus4vs4(data.escuadra, data.suplentes, data.mexText, data.colText)
+      if (emoji === '👎' && !isInAnyList) continue
+
+      let isAdmin = false
+      try {
+        let groupMetadata = await conn.groupMetadata(data.chat)
+        let participant = groupMetadata.participants.find((participantData) => participantData.id === user)
+        isAdmin = participant?.admin === 'admin' || participant?.admin === 'superadmin'
+      } catch {}
+
+      if (emoji === '❌' && isAdmin) {
+        data.escuadra = []
+        data.suplentes = []
+
+        let nuevoTexto = generarVersus(data.escuadra, data.suplentes, data.mexText, data.colText)
+
+        try { await conn.sendMessage(data.chat, { delete: msg.message.reactionMessage.key }) } catch {}
+
+        let sent = await conn.sendMessage(data.chat, { text: nuevoTexto, mentions: [] })
+        delete versusData[msgID]
+        versusData[sent.key.id] = data
+        continue
+      }
+
+      data.escuadra = data.escuadra.filter((listedUser) => listedUser !== user)
+      data.suplentes = data.suplentes.filter((listedUser) => listedUser !== user)
+
+      if (emoji === '❤') {
+        if (data.escuadra.length < 4) data.escuadra.push(user)
+      } else if (emoji === '👍') {
+        if (data.suplentes.length < 2) data.suplentes.push(user)
+      } else if (emoji === '👎') {
+      } else {
+        continue
+      }
+
+      let nuevoTexto = generarVersus(data.escuadra, data.suplentes, data.mexText, data.colText)
+      let mentions = [...data.escuadra, ...data.suplentes]
       try { await conn.sendMessage(data.chat, { delete: msg.message.reactionMessage.key }) } catch {}
-      let sent = await conn.sendMessage(data.chat, { text: nuevoTexto, mentions: [] })
-      delete versusData4[msgID]
-      versusData4[sent.key.id] = data
-      continue
+      let sent = await conn.sendMessage(data.chat, { text: nuevoTexto, mentions })
+      delete versusData[msgID]
+      versusData[sent.key.id] = data
     }
+  })
+}
 
-    data.escuadra = data.escuadra.filter(u => u !== user)
-    data.suplentes = data.suplentes.filter(u => u !== user)
-
-    if (emoji === '❤️') {
-      if (data.escuadra.length < 4) data.escuadra.push(user)
-    } else if (emoji === '👍') {
-      if (data.suplentes.length < 2) data.suplentes.push(user)
-    } else continue
-
-    let nuevoTexto = generarVersus4vs4(data.escuadra, data.suplentes, data.mexText, data.colText)
-    let mentions = [...data.escuadra, ...data.suplentes]
-    try { await conn.sendMessage(data.chat, { delete: msg.message.reactionMessage.key }) } catch {}
-    let sent = await conn.sendMessage(data.chat, { text: nuevoTexto, mentions })
-    delete versusData4[msgID]
-    versusData4[sent.key.id] = data
-  }
-})
+function normalizeReaction(emoji = '') {
+  return emoji.trim().replace(/\uFE0F/g, '')
+}
