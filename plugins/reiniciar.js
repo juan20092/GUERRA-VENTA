@@ -2,15 +2,17 @@ import fs from 'fs'
 import path from 'path'
 import { exec } from 'child_process'
 import { fileURLToPath } from 'url'
-import fetch from 'node-fetch'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const ROOT = path.resolve(__dirname, '..')
 
+// =========================
+// UTILIDADES
+// =========================
 function run(cmd, cwd = ROOT) {
   return new Promise((resolve, reject) => {
-    const child = exec(cmd, { cwd, windowsHide: true, maxBuffer: 1024 * 1024 * 8 }, (err, stdout, stderr) => {
+    exec(cmd, { cwd, windowsHide: true, maxBuffer: 1024 * 1024 * 8 }, (err, stdout, stderr) => {
       if (err) return reject(Object.assign(err, { stdout, stderr }))
       resolve({ stdout, stderr })
     })
@@ -18,39 +20,46 @@ function run(cmd, cwd = ROOT) {
 }
 
 async function hasGit() {
-  try { await run('git --version'); return true } catch { return false }
+  try {
+    await run('git --version')
+    return true
+  } catch {
+    return false
+  }
 }
 
 function isGitRepo() {
-  try { return fs.existsSync(path.join(ROOT, '.git')) } catch { return false }
+  return fs.existsSync(path.join(ROOT, '.git'))
 }
 
-// Guardar información del chat para el mensaje de reconexión
+// =========================
+// GUARDAR INFO RESTART
+// =========================
 function saveRestartInfo(chatId) {
-  const restartFile = path.join(ROOT, 'temp', 'restart_info.json')
-  const info = {
-    chatId: chatId,
-    timestamp: Date.now(),
-    type: 'restart'
-  }
-
-  // Asegurarse de que la carpeta temp existe
   const tempDir = path.join(ROOT, 'temp')
+  const restartFile = path.join(tempDir, 'restart_info.json')
+
   if (!fs.existsSync(tempDir)) {
     fs.mkdirSync(tempDir, { recursive: true })
+  }
+
+  const info = {
+    chatId,
+    timestamp: Date.now()
   }
 
   fs.writeFileSync(restartFile, JSON.stringify(info, null, 2))
 }
 
-let handler = async (m, { conn, usedPrefix, command, isOwner, isROwner }) => {
-  // Solo owner/root owner
+// =========================
+// HANDLER PRINCIPAL
+// =========================
+let handler = async (m, { conn, isOwner, isROwner }) => {
   if (!(isOwner || isROwner)) return
 
-  // Guardar información para el mensaje de reconexión
+  // Guardar info para reconexión
   saveRestartInfo(m.chat)
 
-  // Emoji de espera
   await m.react('🕑')
 
   let logs = []
@@ -61,73 +70,75 @@ let handler = async (m, { conn, usedPrefix, command, isOwner, isROwner }) => {
     logs.push(`> ${title}:\n\`\`\`${trimmed || '(sin salida)'}\`\`\``)
   }
 
-  // 1) git pull si aplica
+  // =========================
+  // GIT PULL
+  // =========================
   try {
     if (isGitRepo() && (await hasGit())) {
       const res = await run('git --no-pager pull --rebase --autostash')
-      pushLog('🎄 Actualización Git', res)
+      pushLog('🎄 Git Update', res)
     } else {
-      logs.push('> 🎄 Actualización Git: omitido (no es repo o no hay git)')
+      logs.push('> 🎄 Git: omitido')
     }
   } catch (e) {
-    pushLog('🎄 Actualización Git (ERROR)', e)
+    pushLog('🎄 Git ERROR', e)
   }
 
-  // 2) npm install
+  // =========================
+  // NPM INSTALL
+  // =========================
   try {
     const res = await run('npm install --no-audit --no-fund')
-    pushLog('📦 Instalación de Dependencias', res)
+    pushLog('📦 Dependencias', res)
   } catch (e) {
-    pushLog('📦 Instalación de Dependencias (ERROR)', e)
+    pushLog('📦 Dependencias ERROR', e)
   }
 
-  // Emoji de éxito antes de reiniciar
   await m.react('✅')
 
-  // Resumen navideño al chat
-  try {
-    await conn.reply(
-      m.chat,
-      `> 🤖 *BOT EN LÍNEANUEVAMENTE SISTEM ONLINE 🍃*
+  // ⚠️ NO enviar mensaje aquí
+  // el mensaje se envía después del restart real
 
-> 🌐 *Estado del servidor:* Conectado
-> ⚡ *Servicios:* Activos
-> 🎯 *Funciones:* Operativas
-> ⚙️ ${logs.join('\n\n')}
-> 📊 *Información del sistema:*
-> 🕑 Tiempo de reconexión: ${Date.now() - info.timestamp}ms
-> 🔰 Estado: ✅ Conectado al servidor
-> 💾 Servicios: 🟢 Todos operativos
-
-> 🎅 *¡Itsuki V3 está listo para ayudarte de nuevo!*
-> ⚡*¡Feliz dia* 🎁`.slice(0, 3500),
-      m
-    )
-  } catch {}
-
-  // Pequeño delay y salir
   setTimeout(() => {
-    try { process.exit(0) } catch {}
-  }, 3000)
+    process.exit(0)
+  }, 2000)
 }
 
-// Función para enviar mensaje de reconexión (se debe llamar cuando el bot se conecte)
+// =========================
+// MENSAJE DE RECONEXIÓN REAL
+// =========================
 export async function sendReconnectionMessage(conn) {
   const restartFile = path.join(ROOT, 'temp', 'restart_info.json')
-  
-  if (fs.existsSync(restartFile)) {
-    try {
-      const info = JSON.parse(fs.readFileSync(restartFile, 'utf8'))
-      
-      // Limpiar archivo temporal
-      fs.unlinkSync(restartFile)
 
-    } catch (error) {
-      console.error('❌ Error leyendo información de reinicio:', error)
-    }
+  if (!fs.existsSync(restartFile)) return
+
+  try {
+    const info = JSON.parse(fs.readFileSync(restartFile, 'utf8'))
+    fs.unlinkSync(restartFile)
+
+    const tiempo = Date.now() - info.timestamp
+
+    await conn.sendMessage(info.chatId, {
+      text: `> 🤖 *BOT EN LÍNEA NUEVAMENTE 🍃*
+
+> 🌐 Estado: Conectado
+> ⚡ Servicios: Activos
+> 🎯 Funciones: Operativas
+> 🕑 Tiempo de reconexión: ${tiempo}ms
+> 🔰 Estado: ✅ Online
+> 💾 Servicios: 🟢 OK
+
+> 🚀 *Sistema listo*`
+    })
+
+  } catch (error) {
+    console.error('❌ Error reconexión:', error)
   }
 }
 
+// =========================
+// CONFIG
+// =========================
 handler.help = ['reiniciar', 'restart']
 handler.tags = ['owner']
 handler.command = /^(fix|reiniciar)$/i
