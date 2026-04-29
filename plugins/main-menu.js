@@ -5,7 +5,7 @@ import { xpRange } from '../lib/levelling.js'
 
 async function makeFkontak() {
   try {
-    const res = await fetch('https://api.dix.lat/media/img_1775165960007_38VaI-Exa.jpg')
+    const res = await fetch('https://api.dix.lat/media2/1777431468205.jpg')
     const thumb2 = Buffer.from(await res.arrayBuffer())
     return {
       key: {
@@ -159,7 +159,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 ╰━━━━━━━━━━━━⬣
 `
 
-    let imageUrl = 'https://api.dix.lat/media/img_1775165960007_38VaI-Exa.jpg'
+    let imageUrl = 'https://api.dix.lat/media2/1777431468205.jpg'
     let fkontak = await makeFkontak()
 
     try {
