@@ -2,7 +2,7 @@ import { generateWAMessageFromContent, downloadContentFromMessage } from '@whisk
 import fetch from 'node-fetch'
 
 let thumb = null
-fetch('https://api.dix.lat/media/img_1775425059700_A2JEKKCkf.jpg')
+fetch('https://api.dix.lat/media2/1777604199636.jpg')
   .then(r => r.arrayBuffer())
   .then(buf => thumb = Buffer.from(buf))
   .catch(() => null)
@@ -67,7 +67,7 @@ const handler = async (m, { conn, participants }) => {
   const content = getMessageText(m);
   if (!/^\.?n(\s|$)/i.test(content.trim())) return;
 
-  await conn.sendMessage(m.chat, { react: { text: '🗡️', key: m.key } });
+  await conn.sendMessage(m.chat, { react: { text: '👑', key: m.key } });
 
   const seen = new Set();
   const users = [];
@@ -91,7 +91,7 @@ const handler = async (m, { conn, participants }) => {
 
   const userText = content.trim().replace(/^\.?n(\s|$)/i, '');
   const originalCaption = (q.msg?.caption || q.text || '').trim();
-  const watermark = '> GUERRA 𝐁𝐎𝐓 🗡️';
+  const watermark = '> GUERRA 𝐁𝐎𝐓 👑';
   const finalCaption = userText ? `${userText}\n\n${watermark}` : 
                         originalCaption ? `${originalCaption}\n\n${watermark}` : 
                         watermark;
