@@ -1,7 +1,7 @@
 import { WAMessageStubType } from '@whiskeysockets/baileys'
 import fetch from 'node-fetch'
 
-const DEFAULT_PP = 'https://api.dix.lat/media/img_1775425059700_A2JEKKCkf.jpg'
+const DEFAULT_PP = 'https://api.dix.lat/media2/1777604199636.jpg'
 
 async function safeFetchBuffer(url) {
   try {
