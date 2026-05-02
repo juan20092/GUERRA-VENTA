@@ -14,9 +14,9 @@ var handler = async (m, { conn,usedPrefix, command, text }) => {
         var number = text;
     }
 
-    if (!text && !m.quoted && !(m.mentionedJid && m.mentionedJid[0])) return conn.reply(m.chat, `> ➤『  𝗠𝗘𝗡𝗖𝗜𝗢𝗡𝗔 𝗔 𝗨𝗡𝗔 𝗣𝗘𝗥𝗦𝗢𝗡𝗔 𝗤𝗨𝗘 𝗗𝗘𝗦𝗘𝗔𝗦 𝗣𝗥𝗢𝗠𝗢𝗩𝗘𝗥 🌟 』 `, m,rcanal);
+    if (!text && !m.quoted && !(m.mentionedJid && m.mentionedJid[0])) return conn.reply(m.chat, `> ➤『  𝗠𝗘𝗡𝗖𝗜𝗢𝗡𝗔 𝗔 𝗨𝗡𝗔 𝗣𝗘𝗥𝗦𝗢𝗡𝗔 𝗤𝗨𝗘 𝗗𝗘𝗦𝗘𝗔𝗦 𝗣𝗥𝗢𝗠𝗢𝗩𝗘𝗥 👑 』 `, m,rcanal);
     
-    if (number && (number.length > 13 || (number.length < 11 && number.length > 0))) return conn.reply(m.chat, `> ➤『  𝗠𝗘𝗡𝗖𝗜𝗢𝗡𝗔 𝗔 𝗨𝗡𝗔 𝗣𝗘𝗥𝗦𝗢𝗡𝗔 𝗤𝗨𝗘 𝗗𝗘𝗦𝗘𝗔𝗦 𝗣𝗥𝗢𝗠𝗢𝗩𝗘𝗥 🌟 』 `, m,rcanal);
+    if (number && (number.length > 13 || (number.length < 11 && number.length > 0))) return conn.reply(m.chat, `> ➤『  𝗠𝗘𝗡𝗖𝗜𝗢𝗡𝗔 𝗔 𝗨𝗡𝗔 𝗣𝗘𝗥𝗦𝗢𝗡𝗔 𝗤𝗨𝗘 𝗗𝗘𝗦𝗘𝗔𝗦 𝗣𝗥𝗢𝗠𝗢𝗩𝗘𝗥 👑 』 `, m,rcanal);
 
     try {
         var user;
