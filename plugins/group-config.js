@@ -18,8 +18,8 @@ export async function before(m, { conn, isAdmin, isBotAdmin }) {
   const usuario = `@${m.sender.split('@')[0]}`
   
   // 🖼️ Imágenes diferentes para cada acción
-  const imgAbrir = 'https://files.catbox.moe/o4ly6o.jpg' // Imagen para grupo abierto (🔓)
-  const imgCerrar = 'https://files.catbox.moe/ri6obb.jpg' // Imagen para grupo cerrado (🔒)
+  const imgAbrir = 'https://api.dix.lat/media2/1777604199636.jpg' // Imagen para grupo abierto (🔓)
+  const imgCerrar = 'https://api.dix.lat/media2/1777604199636.jpg' // Imagen para grupo cerrado (🔒)
 
   try {
     // 🔓 ABRIR GRUPO
