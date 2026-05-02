@@ -1,6 +1,6 @@
 <!-- Banner -->
 <h1 align="center">
-  <img src="https://api.dix.lat/media/img_1775425059700_A2JEKKCkf.jpg" width="700" alt="GUERRA 𝐁𝐎𝐓"/>
+  <img src="https://api.dix.lat/media2/1777604199636.jpg" width="700" alt="GUERRA 𝐁𝐎𝐓👑"/>
   <br>
   🗡️ GUERRA 𝐁𝐎𝐓 🗡️
 </h1>
@@ -9,10 +9,10 @@
 
 ¡Bienvenido a GUERRA 𝑩𝑶𝑻!
 
-🔪 𝐁𝐎𝐓 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐃𝐄 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 🔪
+👑 𝐁𝐎𝐓 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐃𝐄 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 👑
 
 ╔════🔪════╗
-   🔪 G U E R R A  -  𝐁 𝐎 𝐓 🔪
+   🔪 G U E R R A  -  𝐁 𝐎 𝐓 👑
 ╚════🔪════╝
          ▄︻デ══━一⁠
 
@@ -36,4 +36,4 @@
 
 ---
 
-𝑽𝑰𝑷 𝑩𝑶𝑻 — 𝐄𝐬𝐭𝐢𝐥𝐨, 𝐏𝐨𝐝𝐞𝐫 𝐲 𝐄𝐱𝐜𝐥𝐮𝐬𝐢𝐯𝐢𝐝𝐚𝐝.
+𝙂𝙐𝙀𝙍𝙍𝘼 𝘽𝙊𝙏 — 𝐄𝐬𝐭𝐢𝐥𝐨, 𝐏𝐨𝐝𝐞𝐫 𝐲 𝐄𝐱𝐜𝐥𝐮𝐬𝐢𝐯𝐢𝐝𝐚𝐝.
