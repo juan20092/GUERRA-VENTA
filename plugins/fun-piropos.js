@@ -205,5 +205,15 @@ global.piropo = [
   "¿Tienes un nombre o simplemente puedo llamarte mía?",
   "Me voy a quejar a Spotify porque no eres el single más popular de esta semana.",
   "Las rosas son rojas como mi cara, pero eso solo pasa cuando estoy cerca de ti.",
+  "Las estrellas son brillantes como el cielo, pero eso solo pasa cuando te veo.",
+"El sol es cálido como tu sonrisa, pero eso solo lo siento cuando estoy contigo.",
+"El mar es profundo como lo que siento, pero eso solo crece cuando pienso en ti.",
+"La luna es hermosa como tu cara, pero eso solo me deja sin palabras cuando apareces.",
+"El fuego es intenso como mis ganas, pero eso solo pasa cuando te acercas.",
+"El cielo es infinito como mis pensamientos, pero todos terminan en ti.",
+"Las flores son lindas como tu mirada, pero eso solo me enamora más cada día.",
+"El viento es suave como tu voz, pero eso solo me calma cuando te escucho.",
+"La noche es tranquila como tu presencia, pero eso solo me hace querer quedarme.",
+"El tiempo es lento sin ti, pero vuela cuando estoy a tu lado.",
   "Me gustaría invitarte al cine, pero no permiten bocadillos."
 ]
