@@ -1,6 +1,6 @@
 import Presence from '@whiskeysockets/baileys';
 const handler = async (m, {conn, args, text}) => {
-  if (!text) throw `*🔪 𝖨𝖭𝖦𝖱𝖤𝖲𝖤 𝖤𝖫 𝖭𝖮𝖬𝖡𝖱𝖤 𝖰𝖴𝖤 𝖣𝖤𝖲𝖤𝖠 𝖰𝖴𝖤 𝖲𝖤𝖠 𝖤𝖫 𝖭𝖴𝖤𝖵𝖮 𝖭𝖮𝖬𝖡𝖱𝖤 𝖣𝖤𝖫 𝖦𝖱𝖴𝖯𝖮*`;
+  if (!text) throw `*👑 𝖨𝖭𝖦𝖱𝖤𝖲𝖤 𝖤𝖫 𝖭𝖮𝖬𝖡𝖱𝖤 𝖰𝖴𝖤 𝖣𝖤𝖲𝖤𝖠 𝖰𝖴𝖤 𝖲𝖤𝖠 𝖤𝖫 𝖭𝖴𝖤𝖵𝖮 𝖭𝖮𝖬𝖡𝖱𝖤 𝖣𝖤𝖫 𝖦𝖱𝖴𝖯𝖮*`;
   try {
     const text = args.join` `;
     if (!args || !args[0]) {
