@@ -19,9 +19,9 @@ let handler = async (m, { conn, prefix, command }) => {
 
     const caption = `
 ╔══════════╗
-║   🔪 𝑽𝑰𝑷 𝑩𝑶𝑻 𝐇𝐃 🔪
+║   👑 GUERRA BOT
 ╠══════════╣
-𝑬𝒔𝒕𝒊𝒍𝒐 𝑽𝑰𝑷 𝑩𝑶𝑻
+𝑬𝒔𝒕𝒊𝒍𝒐 👑 GUERRA BOT
 `;
 
     await conn.sendMessage(m.chat, {
