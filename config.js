@@ -22,8 +22,8 @@ global.baileys = 'V 6.7.16'
 global.vs = '2.2.0'
 global.usedPrefix = '#'
 global.user2 = '18'
-global.sessions = 'VipBot'
-global.jadi = 'VipBots'
+global.sessions = 'GuerraBot'
+global.jadi = 'GuerraBots'
 global.yukiJadibts = true
 
 global.namecanal = 'ꘓ ✧ GUERRA BOT ┆𝖮𝖿𝗂𝖼𝗂𝖺𝗅 𝖢𝗁𝖺𝗇𝗇𝖾𝗅 ❖ 🍷 ꘔ'
